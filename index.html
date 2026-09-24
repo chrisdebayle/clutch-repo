@@ -109,12 +109,15 @@ h1.light{color:var(--ink-head);}
 .gatebadge{display:inline-block;font-family:var(--font-display);font-weight:700;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--hair-4);border-radius:20px;padding:4px 12px;margin-bottom:10px;}
 @media (max-width:1220px){.chapnav button{padding:7px 7px;font-size:9.5px;letter-spacing:0.08em;}.cobrand .prep{display:none;}}
 @media (max-width:1080px){.chapnav button{padding:7px 5px;font-size:8.5px;letter-spacing:0.05em;}.wordmark{font-size:12px;}}
-@media (max-width:1000px){.g2,.g3,.g4{grid-template-columns:1fr;}.rail{grid-template-columns:1fr;}.reg{grid-template-columns:1fr;}.chapnav{display:none;}.navhint{display:none;}.slide{padding:30px 22px;}}</style>
+.chapselect{display:none;}
+@media (max-width:1000px){.g2,.g3,.g4{grid-template-columns:1fr;}.rail{grid-template-columns:1fr;}.reg{grid-template-columns:1fr;}.chapnav{display:none;}.navhint{display:none;}.cobrand{display:none;}.slide{padding:30px 22px;align-items:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch;}.inner{padding-bottom:24px;}.chapselect{display:block;all:unset;box-sizing:border-box;width:100%;max-width:220px;font-family:var(--font-display);font-weight:600;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-2);background:var(--card-dark);border:1px solid var(--hair-4);border-radius:6px;padding:8px 30px 8px 10px;cursor:pointer;}}
+@media (max-width:480px){.slide{padding:22px 16px;}.topbar{padding:0 16px;}.botbar{padding:0 16px;}.chapselect{max-width:150px;font-size:10px;}.dnum{font-size:clamp(80px,22vw,120px);}}</style>
 </head><body>
 <div class="app">
   <header class="topbar">
     <div class="brandgroup"><div class="wordmark">CHRIS DEBAYLE</div><button id="themeToggle" class="theme-toggle" aria-label="Toggle color theme" type="button"></button></div>
     <nav class="chapnav" id="chapnav"></nav>
+    <select class="chapselect" id="chapselect" aria-label="Jump to chapter"></select>
     <div class="cobrand"><span class="prep">Prepared for</span><span class="clientname">Matt Monte, James Veeneman, Jasen Meece</span></div>
   </header>
   <main class="stage" id="stage">
@@ -454,13 +457,19 @@ h1.light{color:var(--ink-head);}
     var total = slides.length, cur = 0;
     var root = document.documentElement;
     var nav = document.getElementById("chapnav");
-    CH.forEach(function(c){
+    var chapSelect = document.getElementById("chapselect");
+    CH.forEach(function(c, i){
       var b = document.createElement("button");
       b.textContent = c.t;
       b.addEventListener("click", function(){ go(c.first); });
       nav.appendChild(b);
+      var o = document.createElement("option");
+      o.value = i;
+      o.textContent = c.t;
+      chapSelect.appendChild(o);
     });
     var navBtns = Array.prototype.slice.call(nav.querySelectorAll("button"));
+    chapSelect.addEventListener("change", function(){ go(CH[parseInt(chapSelect.value, 10)].first); });
     // Editable-preview bridge: when this deck is iframed by the authoring
     // app, tell the parent which manifest slide is on screen every time it
     // changes, so the app's "Revise this slide" action always targets what
@@ -481,6 +490,7 @@ h1.light{color:var(--ink-head);}
       document.getElementById("cname").textContent = CH[ci].t;
       document.getElementById("progress").style.width = ((cur + 1) / total * 100) + "%";
       navBtns.forEach(function(b, i){ b.classList.toggle("active", i === ci); });
+      chapSelect.value = ci;
       notifyParent(ci, slideIdx);
     }
     function go(i){
@@ -507,11 +517,12 @@ h1.light{color:var(--ink-head);}
       if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); go(cur + 1); }
       if (e.key === "ArrowLeft") { e.preventDefault(); go(cur - 1); }
     });
-    var tx = 0;
-    document.addEventListener("touchstart", function(e){ tx = e.changedTouches[0].screenX; });
+    var tx = 0, ty = 0;
+    document.addEventListener("touchstart", function(e){ tx = e.changedTouches[0].screenX; ty = e.changedTouches[0].screenY; });
     document.addEventListener("touchend", function(e){
-      var d = e.changedTouches[0].screenX - tx;
-      if (Math.abs(d) > 50) go(d < 0 ? cur + 1 : cur - 1);
+      var dx = e.changedTouches[0].screenX - tx;
+      var dy = e.changedTouches[0].screenY - ty;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? cur + 1 : cur - 1);
     });
     var startAt = parseInt(new URLSearchParams(location.search).get("slide") || "0", 10);
     if (startAt > 0 && startAt < total) {
