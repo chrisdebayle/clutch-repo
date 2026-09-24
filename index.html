@@ -1,0 +1,524 @@
+<!DOCTYPE html><html lang="en"><head><script>document.documentElement.setAttribute('data-theme', localStorage.getItem('revplan-theme')||'light');</script><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Revenue Plan: Clutch Solutions · Revenue Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>:root{--font-display:'Space Grotesk','Inter',-apple-system,sans-serif;--font-body:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;--shell-max:1320px;--chip-ink:#0B0E11;--logo-bg:#F4F6F8;}
+:root[data-theme="dark"]{--ground:#0B0E11;--ground-view:#101317;--card-dark:#171B20;--hair-1:#1B2027;--hair-2:#22272D;--hair-3:#262B31;--hair-4:#2A3037;--accent:#F97316;--accent-700:#C85D12;--accent-800:#A84E0F;--primary:#0A66C2;--link-dark:#57A8EE;--ink-body:#E8EBEE;--ink-head:#F4F6F8;--ink-2:#A8B0B9;--muted-2:#7E858E;--muted-3:#737B84;--accent-ink:var(--accent);--accent-btn:var(--accent);--link-ink:var(--link-dark);}
+:root[data-theme="light"]{--ground:#FFFFFF;--ground-view:#F8FAFC;--card-dark:#FFFFFF;--hair-1:#EEF1F4;--hair-2:#E4E7EB;--hair-3:#D9DEE3;--hair-4:#C8CED5;--accent:#F97316;--accent-700:#C85D12;--accent-800:#A84E0F;--primary:#0A66C2;--link-dark:#57A8EE;--ink-body:#3A3F46;--ink-head:#1C1F24;--ink-2:#4B5158;--muted-2:#52585F;--muted-3:#454A52;--accent-ink:var(--accent-700);--accent-btn:var(--accent-800);--link-ink:var(--primary);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;background:var(--ground);color:var(--ink-body);font-family:var(--font-body);overflow:hidden;-webkit-font-smoothing:antialiased;}
+.app{display:flex;flex-direction:column;height:100vh;width:100vw;}
+.topbar{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 34px;height:62px;border-bottom:1px solid var(--hair-2);background:var(--ground);}
+.wordmark{font-family:var(--font-display);font-weight:700;font-size:14px;letter-spacing:0.16em;color:var(--ink-head);white-space:nowrap;}
+.chapnav{display:flex;gap:4px;overflow:hidden;flex-wrap:nowrap;}
+.chapnav button{all:unset;cursor:pointer;font-size:10.5px;font-weight:600;letter-spacing:0.11em;text-transform:uppercase;color:var(--muted-3);padding:7px 10px;border-bottom:2px solid transparent;white-space:nowrap;transition:color .25s ease,border-color .25s ease;}
+.chapnav button:hover{color:var(--ink-2);}
+.chapnav button.active{color:var(--view);border-bottom-color:var(--view);}
+.cobrand{display:flex;align-items:center;gap:12px;white-space:nowrap;}
+.cobrand .prep{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted-3);}
+.cobrand .clientname{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--ink-2);}
+.logoplate{display:inline-flex;align-items:center;justify-content:center;background:var(--logo-bg);border-radius:10px;}
+.logoplate.title{padding:16px 24px;align-self:flex-start;margin-bottom:22px;}
+.titlemark{height:56px;width:auto;display:block;}
+
+.stage{flex:1;position:relative;overflow:hidden;background:var(--ground-view);}
+.slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:46px 54px;opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .3s ease,transform .3s ease;}
+.slide.active{opacity:1;transform:translateY(0);pointer-events:auto;}
+.inner{width:100%;max-width:var(--shell-max);display:flex;flex-direction:column;gap:26px;}
+.eyebrow{font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--view);}
+h1{font-family:var(--font-display);font-weight:700;font-size:clamp(34px,4.4vw,58px);line-height:1.06;color:var(--accent-ink);letter-spacing:-0.015em;}
+h1.light{color:var(--ink-head);}
+.lede{font-size:clamp(16.5px,1.5vw,21px);line-height:1.6;color:var(--ink-2);max-width:900px;font-weight:300;}
+.statement{font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2.6vw,36px);line-height:1.32;color:var(--ink-head);max-width:1020px;letter-spacing:-0.01em;}
+.note{font-size:16px;line-height:1.62;color:var(--ink-2);max-width:980px;font-weight:300;}
+.quote{font-family:var(--font-display);font-weight:500;font-size:clamp(20px,2.4vw,33px);line-height:1.34;color:var(--ink-head);max-width:1000px;border-left:3px solid var(--accent);padding-left:26px;letter-spacing:-0.01em;}
+.quote .src{display:block;margin-top:18px;font-family:var(--font-body);font-weight:500;font-size:12.5px;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted-2);}
+.grid{display:grid;gap:16px;width:100%;}
+.g2{grid-template-columns:1fr 1fr;} .g3{grid-template-columns:repeat(3,1fr);}.g4{grid-template-columns:repeat(4,1fr);}
+.card{background:var(--card-dark);border:1px solid var(--hair-3);border-radius:9px;padding:26px 24px;display:flex;flex-direction:column;gap:10px;}
+.card.hl{border-color:var(--accent-800);}
+.card .ct{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--sc, var(--view));}
+.card.hl .ct{color:var(--accent-btn);}
+.card p{font-size:15.5px;line-height:1.6;color:var(--ink-2);font-weight:300;}
+.card .tag{font-size:10.5px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted-2);font-weight:600;}
+.stat{background:var(--card-dark);border:1px solid var(--hair-3);border-radius:9px;padding:28px 24px;display:flex;flex-direction:column;gap:9px;}
+.stat .sv{font-family:var(--font-display);font-weight:700;font-size:clamp(30px,3.4vw,45px);color:var(--sc, var(--accent-ink));line-height:1;}
+.stat.txt .sv{font-size:clamp(19px,2.1vw,27px);line-height:1.16;}
+.stat .sk{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted-2);font-weight:600;}
+.stat .sd{font-size:14.5px;line-height:1.55;color:var(--ink-2);font-weight:300;}
+.rail{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;width:100%;}
+.rl{background:var(--card-dark);border:1px solid var(--hair-3);border-top:3px solid var(--sc);border-radius:0 0 9px 9px;padding:22px 18px;display:flex;flex-direction:column;gap:10px;}
+.rl .rn{font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--sc);}
+.rl .rt{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--ink-head);line-height:1.22;}
+.rl p{font-size:14.5px;line-height:1.55;color:var(--ink-2);font-weight:300;}
+.rl .own{margin-top:auto;padding-top:12px;border-top:1px solid var(--hair-2);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--sc);font-weight:600;opacity:.85;}
+.list{display:flex;flex-direction:column;gap:17px;width:100%;max-width:980px;}
+.list li{list-style:none;display:flex;gap:20px;align-items:flex-start;font-size:18px;line-height:1.52;color:var(--ink-body);font-weight:300;}
+.list .n{font-family:var(--font-display);font-weight:700;font-size:13.5px;color:var(--accent);min-width:26px;padding-top:4px;letter-spacing:0.05em;}
+.reg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;width:100%;max-width:1320px;align-items:start;}
+.reg .grph{font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--sc, var(--view));margin-bottom:6px;}
+.regrow{display:flex;flex-direction:column;gap:5px;padding:12px 0;border-top:1px solid var(--hair-2);}
+.reg .grp .regrow:first-of-type{border-top:none;}
+.regrow .rtop{display:flex;align-items:baseline;gap:10px;}
+.regn{font-family:var(--font-display);font-weight:700;font-size:12px;color:var(--muted-3);flex:0 0 auto;}
+.regt{flex:1;font-size:14.5px;color:var(--ink-body);font-weight:400;line-height:1.4;}
+.regm{font-size:11.5px;color:var(--ink-2);font-weight:300;padding-left:22px;}
+
+.chiprow{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{display:inline-flex;align-items:center;padding:7px 15px;border-radius:999px;font-family:var(--font-body);font-size:12.5px;font-weight:700;letter-spacing:0.01em;white-space:nowrap;color:var(--chip-ink);background:var(--link-dark);}
+.divider{position:relative;width:100%;}
+.dnum{position:absolute;top:50%;left:0;transform:translateY(-56%);font-family:var(--font-display);font-weight:700;font-size:clamp(120px,17vw,210px);color:var(--view);opacity:.07;line-height:1;user-select:none;z-index:0;letter-spacing:-0.04em;}
+.divider>*:not(.dnum){position:relative;z-index:1;}
+.rule{width:58px;height:3px;background:var(--view);margin:20px 0;}
+.botbar{position:relative;flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 34px;height:52px;border-top:1px solid var(--hair-2);background:var(--ground);}
+.counter{font-size:11px;letter-spacing:0.13em;color:var(--muted-3);font-variant-numeric:tabular-nums;display:flex;gap:13px;align-items:center;text-transform:uppercase;}
+.counter .cur{color:var(--view);font-weight:600;}
+.navhint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;white-space:nowrap;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;color:var(--muted-3);}
+.navhint kbd{font-family:var(--font-body);font-size:10px;font-weight:600;line-height:1;border:1px solid var(--hair-4);border-radius:4px;padding:4px 7px;color:var(--ink-2);background:var(--card-dark);letter-spacing:0.04em;}
+.navhint .sep{color:var(--hair-4);}
+.navbtns{display:flex;gap:9px;}
+.navbtns button{all:unset;cursor:pointer;display:flex;align-items:center;gap:7px;padding:7px 14px;border:1px solid var(--hair-4);border-radius:5px;font-size:10.5px;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-2);font-weight:600;transition:border-color .2s,color .2s,background-color .2s;}
+#prev{border-color:rgba(87,168,238,.42);color:var(--link-ink);}
+#prev:hover{border-color:var(--link-ink);color:var(--link-ink);background:rgba(87,168,238,.12);}
+#next{border-color:rgba(249,115,22,.42);color:var(--accent-btn);}
+#next:hover{border-color:var(--accent-btn);color:var(--accent-btn);background:rgba(249,115,22,.12);}
+.brandgroup{display:flex;align-items:center;gap:10px;}
+.theme-toggle{all:unset;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:999px;border:1px solid var(--hair-4);color:var(--ink-2);font-size:13px;line-height:1;transition:border-color .2s,color .2s;}
+.theme-toggle:hover{border-color:var(--view-raw);color:var(--view-raw);}
+.rangebar{position:relative;height:4px;border-radius:2px;background:var(--hair-3);width:100%;margin-top:4px;}
+.rangebar i{position:absolute;top:0;height:4px;border-radius:2px;background:var(--sc, var(--view));display:block;}
+:root[data-theme="light"] .stat .sv{color:color-mix(in srgb, var(--sc, var(--accent-700)) 60%, black 40%);}
+:root[data-theme="light"] .card .ct{color:color-mix(in srgb, var(--sc, var(--view-raw)) 60%, black 40%);}
+:root[data-theme="light"] .card.hl .ct{color:var(--accent-btn);}
+.ladder{display:flex;align-items:center;justify-content:space-between;width:100%;margin-bottom:4px;}
+.ladderstep{display:flex;flex-direction:column;align-items:center;gap:8px;flex:0 0 auto;}
+.ladderdot{width:34px;height:34px;border-radius:50%;border:2px solid var(--sc);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--sc);background:var(--ground-view);flex:0 0 auto;}
+.laddertag{font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-2);font-weight:600;white-space:nowrap;}
+.ladderline{flex:1 1 auto;height:2px;background:var(--hair-3);min-width:14px;margin:0 6px;transform:translateY(-21px);}
+.stat .rf{display:flex;flex-direction:column;gap:8px;margin-top:2px;}
+.stat .rf .rfrow{display:flex;gap:8px;align-items:flex-start;}
+.stat .rf .lbl{flex:0 0 auto;font-family:var(--font-display);font-weight:700;font-size:9.5px;letter-spacing:0.13em;text-transform:uppercase;padding:2px 7px;border-radius:4px;margin-top:1px;}
+.stat .rf .lbl.risk{color:#B4231F;background:rgba(180,35,31,.12);}
+.stat .rf .lbl.fix{color:#1B6B3A;background:rgba(27,107,58,.12);}
+.stat .rf p{margin:0;font-size:13.5px;line-height:1.5;color:var(--ink-2);font-weight:300;}
+.reg .grp{border:1px solid var(--hair-3);border-top:3px solid var(--sc, var(--view));border-radius:9px;padding:18px 20px 10px;background:var(--card-dark);display:flex;flex-direction:column;}
+:root[data-theme="light"] .rl .rn,:root[data-theme="light"] .rl .own{color:color-mix(in srgb, var(--sc) 60%, black 40%);}
+.progress{position:absolute;left:0;bottom:0;height:2px;background:var(--accent);transition:width .3s ease;z-index:6;}
+.lockgate{display:flex;align-items:center;gap:16px;background:var(--accent);border-radius:9px;padding:15px 22px;}
+.lockgate .lgt{font-family:var(--font-display);font-weight:700;font-size:14.5px;color:var(--ground);letter-spacing:0.06em;}
+.lockgate .lgd{font-size:13px;line-height:1.4;color:rgba(11,14,17,.8);font-weight:500;}
+.gatebadge{display:inline-block;font-family:var(--font-display);font-weight:700;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--hair-4);border-radius:20px;padding:4px 12px;margin-bottom:10px;}
+@media (max-width:1220px){.chapnav button{padding:7px 7px;font-size:9.5px;letter-spacing:0.08em;}.cobrand .prep{display:none;}}
+@media (max-width:1080px){.chapnav button{padding:7px 5px;font-size:8.5px;letter-spacing:0.05em;}.wordmark{font-size:12px;}}
+@media (max-width:1000px){.g2,.g3,.g4{grid-template-columns:1fr;}.rail{grid-template-columns:1fr;}.reg{grid-template-columns:1fr;}.chapnav{display:none;}.navhint{display:none;}.slide{padding:30px 22px;}}</style>
+</head><body>
+<div class="app">
+  <header class="topbar">
+    <div class="brandgroup"><div class="wordmark">CHRIS DEBAYLE</div><button id="themeToggle" class="theme-toggle" aria-label="Toggle color theme" type="button"></button></div>
+    <nav class="chapnav" id="chapnav"></nav>
+    <div class="cobrand"><span class="prep">Prepared for</span><span class="clientname">Matt Monte, James Veeneman, Jasen Meece</span></div>
+  </header>
+  <main class="stage" id="stage">
+    <section class="slide active" data-ch="0" data-slide-idx="-1"><div class="inner">
+        <div class="logoplate title"><img class="titlemark" src="data:image/webp;base64,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" alt="Clutch Solutions"></div>
+        <div class="eyebrow">Internal Operating Plan · Account Executive, Dallas/Ft. Worth Metroplex</div>
+        <h1>Revenue Plan: Clutch Solutions</h1>
+        <div class="rule"></div>
+        <div class="lede">Prepared by Chris Debayle · Account Executive, Clutch Solutions</div>
+      </div></section>
+    <section class="slide" data-ch="0" data-slide-idx="0"><div class="inner">
+        <div class="divider">
+          <div class="dnum">01</div>
+          <h1 class="light">The Baseline</h1>
+          <div class="rule"></div>
+          <div class="lede">No formal quota and no prior-period actual. The baseline is capacity, territory, and strategy.</div>
+        </div>
+      </div></section><section class="slide" data-ch="0" data-slide-idx="1"><div class="inner">
+        <div class="eyebrow">Why there&#39;s no target to hit yet</div>
+        <div class="quote">No formal quota. Sales leadership reviews self-set targets quarterly; ramp expectation is informal, tied to book-of-business growth over the first two years.<span class="src">MANAGER · SCOPING CALL</span></div>
+        <div class="note">This plan treats that informal expectation as real and testable, not as an excuse to skip measurement.</div>
+      </div></section><section class="slide" data-ch="0" data-slide-idx="2"><div class="inner">
+        <div class="eyebrow">What&#39;s known versus what has to be pulled</div>
+        <div class="grid g2">
+          <div class="card">
+                <div class="tag">TERRITORY</div>
+                <div class="ct">Dallas / Ft. Worth, Mid-Market &amp; Enterprise</div>
+                <p>New-logo motion. Five competing VARs contesting the same accounts &mdash; three national-scale, two regional. Clutch brings faster growth (Inc. 5000, CRN Triple Crown) and MBE certification as a structural edge the national players can&#39;t match, where supplier-diversity spend applies.</p>
+              </div><div class="card">
+                <div class="tag">CRM</div>
+                <div class="ct">Salesforce holds territory history, no pipeline logged yet under this rep</div>
+                <p>Historical account and vendor data exists for the territory. No opportunities are logged under this rep in Salesforce yet &mdash; this seat is new, the relationships and territory knowledge aren&#39;t.</p>
+              </div><div class="card">
+                <div class="tag">VENDOR DATA</div>
+                <div class="ct">Vendor access is in place, not yet pulled</div>
+                <p>OEM portals are accessible for margin and rebate reference. The strategic priority sits in The Quarters &mdash; rebates are a byproduct of vendor depth, not the target.</p>
+              </div><div class="card hl">
+                <div class="tag">GAP</div>
+                <div class="ct">Four pulls before Q1 targets mean anything</div>
+                <p>Account universe, incumbent VAR per account, vendor margin bands, and prior territory coverage history all need to be pulled before this baseline can carry real numbers.</p>
+              </div>
+        </div>
+      </div></section><section class="slide" data-ch="1" data-slide-idx="0"><div class="inner">
+        <div class="divider">
+          <div class="dnum">02</div>
+          <h1 class="light">Capacity &amp; Coverage</h1>
+          <div class="rule"></div>
+          <div class="lede">Built for this plan, not drawn from an external model. Every number here is a range with a test attached, not a benchmark.</div>
+        </div>
+      </div></section><section class="slide" data-ch="1" data-slide-idx="1"><div class="inner">
+        <div class="eyebrow">Working ranges, each with a named test</div>
+        <div class="grid g3">
+          <div class="stat txt" style="--sc:#57A8EE">
+                <div class="sv">25-40</div>
+                <div class="sk">Active named accounts</div>
+                <div class="sd">Test: track actual opportunity creation, weeks 1-13</div>
+                <div class="rangebar"><i style="left:50%;width:30%"></i></div>
+              </div><div class="stat txt" style="--sc:#F97316">
+                <div class="sv">8-15</div>
+                <div class="sk">New opportunities per quarter, once ramped</div>
+                <div class="sd">Test: same 13-week window, compared against this band</div>
+                <div class="rangebar"><i style="left:40%;width:35%"></i></div>
+              </div><div class="stat txt" style="--sc:#8B5CF6">
+                <div class="sv">60-120 days</div>
+                <div class="sk">Sales cycle, qualified to close</div>
+                <div class="sd">Test: timestamp the first 10 closed deals start to finish</div>
+                <div class="rangebar"><i style="left:33.3%;width:33.3%"></i></div>
+              </div><div class="stat txt" style="--sc:#22C55E">
+                <div class="sv">15-25%</div>
+                <div class="sk">Win rate against an entrenched incumbent</div>
+                <div class="sd">Test: track win/loss on the first 20 qualified opportunities</div>
+                <div class="rangebar"><i style="left:37.5%;width:25%"></i></div>
+              </div>
+        </div>
+        <div class="note">This is a constructed model built for this specific plan, not a validated external methodology.</div>
+      </div></section><section class="slide" data-ch="1" data-slide-idx="2"><div class="inner">
+        <div class="eyebrow">The one number that&#39;s still missing</div>
+        <div class="statement">Coverage math (how many opportunities it takes to hit any given GP target) can&#39;t be solved until average deal GP is pulled from closed-won history. That pull is the single highest-leverage data request in this plan.</div>
+        <div class="chiprow"><span class="chip">Requires: 12 months of closed-won GP data</span><span class="chip">Territory or adjacent-territory proxy</span></div>
+      </div></section><section class="slide" data-ch="2" data-slide-idx="0"><div class="inner">
+        <div class="divider">
+          <div class="dnum">03</div>
+          <h1 class="light">The Quarters</h1>
+          <div class="rule"></div>
+          <div class="lede">Four quarters, each gated on a stated condition, not on the calendar.</div>
+        </div>
+      </div></section><section class="slide" data-ch="2" data-slide-idx="1"><div class="inner">
+        <div class="eyebrow">What has to be true to move forward</div>
+        <div class="ladder">
+          <div class="ladderstep"><div class="ladderdot" style="--sc:#57A8EE">01</div><div class="laddertag">Map &amp; Instrument</div></div>
+          <div class="ladderline"></div>
+          <div class="ladderstep"><div class="ladderdot" style="--sc:#F97316">02</div><div class="laddertag">Convert &amp; Read</div></div>
+          <div class="ladderline"></div>
+          <div class="ladderstep"><div class="ladderdot" style="--sc:#8B5CF6">03</div><div class="laddertag">Compound</div></div>
+          <div class="ladderline"></div>
+          <div class="ladderstep"><div class="ladderdot" style="--sc:#22C55E">04</div><div class="laddertag">Reset the Range</div></div>
+        </div>
+        <div class="rail">
+          <div class="rl" style="--sc:#57A8EE">
+                <div class="rn">01 · Q1: Map &amp; Instrument</div>
+                <div class="rt">Q1: Map &amp; Instrument</div>
+                <p>Named-account list finalized with incumbent-competitor tagged, and outbound sequencing live across the full account base. The opportunity-count gate begins at Q2, aligned with the month 4-6 ramp-to-productivity window &mdash; months 1-3 are mapping and relationship-building, not quota-bearing.</p>
+                <div class="own">Rep</div>
+              </div><div class="rl" style="--sc:#F97316">
+                <div class="rn">02 · Q2: Convert &amp; Read</div>
+                <div class="rt">Q2: Convert &amp; Read</div>
+                <p>First real read on what&#39;s converting, correct list, message, or execution based on what that read shows. At least one deal reaches full documentation, not just verbal commitment.</p>
+                <div class="own">Rep</div>
+              </div><div class="rl" style="--sc:#8B5CF6">
+                <div class="rn">03 · Q3: Compound</div>
+                <div class="rt">Q3: Compound</div>
+                <p>Double down on whatever vertical or account type is actually converting &mdash; AI infrastructure is the first candidate worth testing, given where Clutch&#39;s own investment and vendor certifications run deepest &mdash; going deep on the top infrastructure and software vendors rather than chasing rebates account by account. Three or more new logos closed, with GP and cycle time now real numbers instead of ranges.</p>
+                <div class="own">Rep</div>
+              </div><div class="rl" style="--sc:#22C55E">
+                <div class="rn">04 · Q4: Reset the Range</div>
+                <div class="rt">Q4: Reset the Range</div>
+                <p>Rebuild every capacity and coverage number using a full year of actual data. Present the revised range to leadership as the basis for Year 2 targets.</p>
+                <div class="own">Rep + Manager</div>
+              </div>
+        </div>
+        <div class="lockgate">
+          <div>
+            <div class="lgt">QUARTER GATE</div>
+            <div class="lgd">Each quarter&#39;s exit condition must be met before the next quarter&#39;s plan is treated as live.</div>
+          </div>
+        </div>
+        
+      </div></section><section class="slide" data-ch="3" data-slide-idx="0"><div class="inner">
+        <div class="divider">
+          <div class="dnum">04</div>
+          <h1 class="light">The Rail</h1>
+          <div class="rule"></div>
+          <div class="lede">How a deal earns its way to the forecast: five wins, in order, each with its own evidence.</div>
+        </div>
+      </div></section><section class="slide" data-ch="3" data-slide-idx="1"><div class="inner">
+        <div class="eyebrow">The method</div>
+        <div class="ladder">
+          <div class="ladderstep"><div class="ladderdot" style="--sc:#57A8EE">01</div><div class="laddertag">Signal</div></div>
+          <div class="ladderline"></div>
+          <div class="ladderstep"><div class="ladderdot" style="--sc:#4C8FD6">02</div><div class="laddertag">Pipeline</div></div>
+          <div class="ladderline"></div>
+          <div class="ladderstep"><div class="ladderdot" style="--sc:#F97316">03</div><div class="laddertag">Maturation</div></div>
+          <div class="ladderline"></div>
+          <div class="ladderstep"><div class="ladderdot" style="--sc:#D96A24">04</div><div class="laddertag">Negotiation</div></div>
+          <div class="ladderline"></div>
+          <div class="ladderstep"><div class="ladderdot" style="--sc:#F97316">05</div><div class="laddertag">Closed</div></div>
+        </div>
+        <div class="rail">
+          <div class="rl" style="--sc:#57A8EE">
+                <div class="rn">01 &middot; Signal</div>
+                <div class="rt">Signal</div>
+                <p>Outbound opens by naming the account&#39;s own operational reality &mdash; the incumbent VAR, the vendor gap &mdash; using RVP construction, not a generic intro.</p>
+                <div class="own">RVP</div>
+              </div><div class="rl" style="--sc:#4C8FD6">
+                <div class="rn">02 &middot; Pipeline</div>
+                <div class="rt">Qualified pipeline</div>
+                <p>Every touch is disposition-tagged in Salesforce from day one, so the read shows whether a list, message, or rep problem is constraining the funnel.</p>
+                <div class="own">Disposition Science</div>
+              </div><div class="rl" style="--sc:#F97316">
+                <div class="rn">03 &middot; Maturation</div>
+                <div class="rt">VALID maturation</div>
+                <p>Five wins, each earned and documented, before an opportunity is allowed into forecast.</p>
+                <div class="own">VALID&trade;</div>
+              </div><div class="rl" style="--sc:#D96A24">
+                <div class="rn">04 &middot; Negotiation</div>
+                <div class="rt">Negotiation</div>
+                <p>Terms shaped from vendor margin bands pulled off OEM portals, not concessions used to rescue a stalling deal.</p>
+                <div class="own">OEM SE &middot; per deal</div>
+              </div><div class="rl" style="--sc:#F97316">
+                <div class="rn">05 &middot; Closed</div>
+                <div class="rt">Closed</div>
+                <p>A forecast that holds because every win has an artifact &mdash; closed-won GP and cycle time convert this plan&#39;s ranges into Sourced fact.</p>
+                <div class="own">Logged &middot; Salesforce</div>
+              </div>
+        </div>
+        <div class="note">I own every stage of this rail personally, start to close. <em>Technical talent comes in per deal, not as a fixed team</em> &mdash; an OEM SE or solutions architect, whichever the account calls for &mdash; because a single-rep territory is what this seat is built to run.</div>
+      </div></section><section class="slide" data-ch="3" data-slide-idx="2"><div class="inner">
+        <div class="eyebrow">How signal actually gets made</div>
+        <div class="grid g4">
+          <div class="card" style="--sc:#57A8EE">
+                <div class="tag">TECH EDGE</div>
+                <div class="ct">Best-in-class data intelligence, not guesswork</div>
+                <p>Origami and White Whale drive account and contact intelligence, backed by a disciplined dialer cadence run personally to keep outreach volume consistent &mdash; a &#39;whatever it takes&#39; approach to the technology edge.</p>
+              </div><div class="card" style="--sc:#F97316">
+                <div class="tag">OEM ALIGNMENT</div>
+                <div class="ct">Strategized, not transactional, with OEM AEs</div>
+                <p>OEM account executives are engaged as active partners on my accounts, aligned to how this territory hunts new business, not treated as a rebate or spec resource.</p>
+              </div><div class="card" style="--sc:#8B5CF6">
+                <div class="tag">FACE TIME</div>
+                <div class="ct">In the room with the actual buyer</div>
+                <p>Regional conferences and industry events put me in front of the CIOs, CTOs, and VPs of IT who own these decisions across Dallas/Ft. Worth, ahead of any cold outreach.</p>
+              </div><div class="card" style="--sc:#22C55E">
+                <div class="tag">PATTERN DISRUPTION</div>
+                <div class="ct">Earned access, not another vendor lunch</div>
+                <p>High-touch relationship-building &mdash; sponsored socials and other shared experiences &mdash; builds top-of-mind share with key accounts that a generic outbound cadence can&#39;t.</p>
+              </div>
+        </div>
+        <div class="note">This runs alongside the systemized rail above, not instead of it &mdash; Signal starts as often at a conference table as it does on a cold call.</div>
+      </div></section><section class="slide" data-ch="3" data-slide-idx="3"><div class="inner">
+        <div class="eyebrow">What closes each win, on this territory</div>
+        <div class="ladder">
+          <div class="ladderstep"><div class="ladderdot" style="--sc:#57A8EE">V</div><div class="laddertag">Validated</div></div>
+          <div class="ladderline"></div>
+          <div class="ladderstep"><div class="ladderdot" style="--sc:#F97316">A</div><div class="laddertag">Aligned</div></div>
+          <div class="ladderline"></div>
+          <div class="ladderstep"><div class="ladderdot" style="--sc:#8B5CF6">L</div><div class="laddertag">Locked</div></div>
+          <div class="ladderline"></div>
+          <div class="ladderstep"><div class="ladderdot" style="--sc:#22C55E">I</div><div class="laddertag">Invested</div></div>
+          <div class="ladderline"></div>
+          <div class="ladderstep"><div class="ladderdot" style="--sc:#EAB308">D</div><div class="laddertag">Documented</div></div>
+        </div>
+        <div class="rail">
+          <div class="rl" style="--sc:#57A8EE">
+                <div class="rn">01 · Validated</div>
+                <div class="rt">Validated</div>
+                <p>Technical evaluation criteria set with the prospect&#39;s own team, using whichever OEM specialist (HPE, Nutanix, or other) fits that account, not a generic checklist.</p>
+                <div class="own">Rep, with SE/solutions architect brought in per deal</div>
+              </div><div class="rl" style="--sc:#F97316">
+                <div class="rn">02 · Aligned</div>
+                <div class="rt">Aligned</div>
+                <p>A champion inside the account is multi-threaded beyond one contact, especially critical where an incumbent VAR already has that relationship.</p>
+                <div class="own">Rep</div>
+              </div><div class="rl" style="--sc:#8B5CF6">
+                <div class="rn">03 · Locked</div>
+                <div class="rt">Locked</div>
+                <p>A named sponsor and a real decision date exist, with a stated cost if the date slips, not just a soft target.</p>
+                <div class="own">Rep</div>
+              </div><div class="rl" style="--sc:#22C55E">
+                <div class="rn">04 · Invested</div>
+                <div class="rt">Invested</div>
+                <p>Budget confirmed directly with the economic buyer, not assumed from a champion&#39;s read of the room.</p>
+                <div class="own">Rep</div>
+              </div><div class="rl" style="--sc:#EAB308">
+                <div class="rn">05 · Documented</div>
+                <div class="rt">Documented</div>
+                <p>Redlines cleared and a signature path confirmed with procurement before the deal is called closed.</p>
+                <div class="own">Rep</div>
+              </div>
+        </div>
+        <div class="lockgate">
+          <div>
+            <div class="lgt">FORECAST GATE</div>
+            <div class="lgd">A deal only enters the forecast once every one of these five wins is fully documented, no exceptions for a deal that feels close.</div>
+          </div>
+        </div>
+        <div class="note">One rep carries every win here; no fixed team beyond specialists brought in per deal as needed.</div>
+      </div></section><section class="slide" data-ch="4" data-slide-idx="0"><div class="inner">
+        <div class="divider">
+          <div class="dnum">05</div>
+          <h1 class="light">KPI &amp; Risk</h1>
+          <div class="rule"></div>
+          <div class="lede">Nine numbers to watch, what a bad signal looks like, and what to do about it.</div>
+        </div>
+      </div></section><section class="slide" data-ch="4" data-slide-idx="1"><div class="inner">
+        <div class="eyebrow">Targets, risk signals, and the fix</div>
+        <div class="grid g3">
+          <div class="stat txt" style="--sc:#57A8EE">
+                <div class="sv">25-40</div>
+                <div class="sk">Active named accounts by end of Q1</div>
+                <div class="rf"><div class="rfrow"><span class="lbl risk">Risk</span><p>fewer than 15 mapped by week 6</p></div><div class="rfrow"><span class="lbl fix">Fix</span><p>escalate the account pull, check territory data completeness</p></div></div>
+              </div><div class="stat txt" style="--sc:#F97316">
+                <div class="sv">8-15/qtr</div>
+                <div class="sk">New opportunities, ramped by Q2</div>
+                <div class="rf"><div class="rfrow"><span class="lbl risk">Risk</span><p>under 5 by end of Q1</p></div><div class="rfrow"><span class="lbl fix">Fix</span><p>check whether it&#39;s a list problem or a message problem before changing either</p></div></div>
+              </div><div class="stat txt" style="--sc:#8B5CF6">
+                <div class="sv">15-25%</div>
+                <div class="sk">Win rate on displacement deals</div>
+                <div class="rf"><div class="rfrow"><span class="lbl risk">Risk</span><p>under 10% after 15 qualified opps</p></div><div class="rfrow"><span class="lbl fix">Fix</span><p>re-map the champion and check how deep the multi-threading actually goes</p></div></div>
+              </div><div class="stat txt" style="--sc:#22C55E">
+                <div class="sv">60-120 days</div>
+                <div class="sk">Sales cycle, qualified to close</div>
+                <div class="rf"><div class="rfrow"><span class="lbl risk">Risk</span><p>median cycle over 150 days by Q2</p></div><div class="rfrow"><span class="lbl fix">Fix</span><p>audit stalled deals stuck at verbal commitment, not yet documented</p></div></div>
+              </div><div class="stat txt" style="--sc:#EC4899">
+                <div class="sv">3+</div>
+                <div class="sk">Closed-won new logos by end of Q3</div>
+                <div class="rf"><div class="rfrow"><span class="lbl risk">Risk</span><p>zero closes by end of Q2</p></div><div class="rfrow"><span class="lbl fix">Fix</span><p>pull the activity data and raise it in the next manager 1:1</p></div></div>
+              </div><div class="stat txt" style="--sc:#EAB308">
+                <div class="sv">Requires data</div>
+                <div class="sk">Average deal GP</div>
+                <div class="rf"><div class="rfrow"><span class="lbl risk">Risk</span><p>can&#39;t compute coverage math without it</p></div><div class="rfrow"><span class="lbl fix">Fix</span><p>manager-assisted pull from an adjacent territory as an interim proxy</p></div></div>
+              </div><div class="stat txt" style="--sc:#4C8FD6">
+                <div class="sv">At floor</div>
+                <div class="sk">Meeting-to-activated conversion rate</div>
+                <div class="rf"><div class="rfrow"><span class="lbl risk">Risk</span><p>below floor at first read in Q2</p></div><div class="rfrow"><span class="lbl fix">Fix</span><p>fix the list before the message, the message before the rep</p></div></div>
+              </div><div class="stat txt" style="--sc:#D96A24">
+                <div class="sv">Zero</div>
+                <div class="sk">Unresolved assumptions remaining by end of Q4</div>
+                <div class="rf"><div class="rfrow"><span class="lbl risk">Risk</span><p>more than 2 still open entering Q4</p></div><div class="rfrow"><span class="lbl fix">Fix</span><p>force a mid-quarter data pull instead of waiting for year-end</p></div></div>
+              </div><div class="stat txt" style="--sc:#6D28D9">
+                <div class="sv">Untested</div>
+                <div class="sk">SE/OEM support responsiveness inside a deal</div>
+                <div class="rf"><div class="rfrow"><span class="lbl risk">Risk</span><p>technical support unavailable inside a deal&#39;s decision window, given known thin internal delivery capacity</p></div><div class="rfrow"><span class="lbl fix">Fix</span><p>pre-clear OEM SE relationships in Q1; escalate to manager if a live deal stalls waiting on support</p></div></div>
+              </div>
+        </div>
+        
+      </div></section><section class="slide" data-ch="5" data-slide-idx="0"><div class="inner">
+        <div class="divider">
+          <div class="dnum">06</div>
+          <h1 class="light">Assumptions &amp; Open Asks</h1>
+          <div class="rule"></div>
+          <div class="lede">Every open question in this plan lives here. Nothing is scattered.</div>
+        </div>
+      </div></section><section class="slide" data-ch="5" data-slide-idx="1"><div class="inner">
+        <div class="eyebrow">Owned, dated, and tracked to close</div>
+        <div class="reg">
+          <div class="grp" style="--sc:#57A8EE">
+            <div class="grph">Data pulls &middot; rep, due Q1</div>
+            <div class="regrow"><div class="rtop"><span class="regn">01</span><span class="regt">Named-account list, Dallas/Ft. Worth MM+ENT</span></div><span class="regm">Salesforce &middot; wk 2</span></div>
+            <div class="regrow"><div class="rtop"><span class="regn">02</span><span class="regt">Incumbent VAR tagged per account</span></div><span class="regm">Salesforce opp history &middot; wk 3</span></div>
+            <div class="regrow"><div class="rtop"><span class="regn">03</span><span class="regt">OEM margin &amp; rebate bands</span></div><span class="regm">Partner portals &middot; wk 2</span></div>
+            <div class="regrow"><div class="rtop"><span class="regn">04</span><span class="regt">Average closed-won GP per deal, prior 12 months</span></div><span class="regm">Rep + manager &middot; end of Q1</span></div>
+          </div>
+          <div class="grp" style="--sc:#EC4899">
+            <div class="grph">Open assumptions &middot; tested as data comes in</div>
+            <div class="regrow"><div class="rtop"><span class="regn">05</span><span class="regt">Capacity: 25-40 accounts, 8-15 opps/quarter</span></div><span class="regm">Test: weeks 1-13</span></div>
+            <div class="regrow"><div class="rtop"><span class="regn">06</span><span class="regt">Cycle length: 60-120 days</span></div><span class="regm">Test: first 10 closes &middot; by Q2</span></div>
+            <div class="regrow"><div class="rtop"><span class="regn">07</span><span class="regt">Win rate: 15-25%, incumbent displacement</span></div><span class="regm">Test: first 20 quals &middot; by Q2</span></div>
+          </div>
+          <div class="grp" style="--sc:#F97316">
+            <div class="grph">Decision pending</div>
+            <div class="regrow"><div class="rtop"><span class="regn">08</span><span class="regt">Target provenance &mdash; no formal quota exists</span></div><span class="regm">Manager &middot; Q1 1:1</span></div>
+          </div>
+        </div>
+        <div class="note">This plan is still in progress; the ship gate hasn&#39;t cleared yet, and these open items are exactly why.</div>
+      </div></section>
+    <div class="progress" id="progress"></div>
+  </main>
+  <footer class="botbar">
+    <div class="counter"><span><span class="cur" id="cnum">01</span> / 16</span><span id="cname">Opening</span></div>
+    <div class="navhint"><kbd>&larr;</kbd><kbd>&rarr;</kbd><span>arrow keys</span><span class="sep">&middot;</span><kbd>space</kbd><span>to advance</span></div>
+    <div class="navbtns"><button id="prev">&larr; Prev</button><button id="next">Next &rarr;</button></div>
+  </footer>
+</div>
+<script>(function(){
+    var CH = [{"t":"The Baseline","c":"#57A8EE","lc":"#0A66C2","first":1},{"t":"Capacity & Coverage","c":"#F97316","lc":"#A84E0F","first":4},{"t":"The Quarters","c":"#8B5CF6","lc":"#6D28D9","first":7},{"t":"The Rail","c":"#22C55E","lc":"#166534","first":9},{"t":"KPI & Risk","c":"#EAB308","lc":"#946200","first":13},{"t":"Assumptions & Open Asks","c":"#EC4899","lc":"#BE185D","first":15}];
+    var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+    var total = slides.length, cur = 0;
+    var root = document.documentElement;
+    var nav = document.getElementById("chapnav");
+    CH.forEach(function(c){
+      var b = document.createElement("button");
+      b.textContent = c.t;
+      b.addEventListener("click", function(){ go(c.first); });
+      nav.appendChild(b);
+    });
+    var navBtns = Array.prototype.slice.call(nav.querySelectorAll("button"));
+    // Editable-preview bridge: when this deck is iframed by the authoring
+    // app, tell the parent which manifest slide is on screen every time it
+    // changes, so the app's "Revise this slide" action always targets what
+    // you're actually looking at. A no-op when opened standalone (top-level
+    // window) or by any other embedder that isn't listening for this.
+    function notifyParent(ci, slideIdx){
+      if (window.parent === window) return;
+      window.parent.postMessage({ type: "revplan-active-slide", chapterIndex: ci, slideIndex: slideIdx, globalIndex: cur, total: total }, "*");
+    }
+    function paint(){
+      var s = slides[cur];
+      var ci = parseInt(s.dataset.ch, 10);
+      var slideIdx = parseInt(s.dataset.slideIdx, 10);
+      var theme = document.documentElement.getAttribute("data-theme");
+      root.style.setProperty("--view-raw", CH[ci].c);
+      root.style.setProperty("--view", theme === "light" ? CH[ci].lc : CH[ci].c);
+      document.getElementById("cnum").textContent = String(cur + 1).padStart(2, "0");
+      document.getElementById("cname").textContent = CH[ci].t;
+      document.getElementById("progress").style.width = ((cur + 1) / total * 100) + "%";
+      navBtns.forEach(function(b, i){ b.classList.toggle("active", i === ci); });
+      notifyParent(ci, slideIdx);
+    }
+    function go(i){
+      if (i < 0 || i >= total || i === cur) return;
+      slides[cur].classList.remove("active");
+      cur = i;
+      slides[cur].classList.add("active");
+      paint();
+    }
+    var themeToggle = document.getElementById("themeToggle");
+    function setTheme(t){
+      document.documentElement.setAttribute("data-theme", t);
+      localStorage.setItem("revplan-theme", t);
+      themeToggle.textContent = t === "dark" ? "\u2600" : "\u263E";
+      paint();
+    }
+    setTheme(document.documentElement.getAttribute("data-theme") || "light");
+    themeToggle.addEventListener("click", function(){
+      setTheme(document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light");
+    });
+    document.getElementById("next").addEventListener("click", function(){ go(cur + 1); });
+    document.getElementById("prev").addEventListener("click", function(){ go(cur - 1); });
+    document.addEventListener("keydown", function(e){
+      if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); go(cur + 1); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); go(cur - 1); }
+    });
+    var tx = 0;
+    document.addEventListener("touchstart", function(e){ tx = e.changedTouches[0].screenX; });
+    document.addEventListener("touchend", function(e){
+      var d = e.changedTouches[0].screenX - tx;
+      if (Math.abs(d) > 50) go(d < 0 ? cur + 1 : cur - 1);
+    });
+    var startAt = parseInt(new URLSearchParams(location.search).get("slide") || "0", 10);
+    if (startAt > 0 && startAt < total) {
+      slides[0].classList.remove("active");
+      cur = startAt;
+      slides[cur].classList.add("active");
+    }
+    paint();
+  })();</script>
+</body></html>
