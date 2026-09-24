@@ -442,11 +442,16 @@ h1.light{color:var(--ink-head);}
           </div>
         </div>
         <div class="note">This plan is still in progress; the ship gate hasn&#39;t cleared yet, and these open items are exactly why.</div>
+      </div></section><section class="slide" data-ch="5" data-slide-idx="2"><div class="inner">
+        <div class="eyebrow">Where this goes from here</div>
+        <div class="statement">This is a starting plan, not a finished one. I&#39;d rather build it with you than present it as done.</div>
+        <div class="note">Every range in here gets replaced by real data as Q1 unfolds, and I&#39;ll bring those updates to our 1:1s rather than saving them for a formal review. If anything here should be challenged before I start executing against it, now&#39;s the time &mdash; happy to walk through any section live.</div>
+        <div class="lede">Chris Debayle &middot; Account Executive, Clutch Solutions</div>
       </div></section>
     <div class="progress" id="progress"></div>
   </main>
   <footer class="botbar">
-    <div class="counter"><span><span class="cur" id="cnum">01</span> / 16</span><span id="cname">Opening</span></div>
+    <div class="counter"><span><span class="cur" id="cnum">01</span> / <span id="ctotal">16</span></span><span id="cname">Opening</span></div>
     <div class="navhint"><kbd>&larr;</kbd><kbd>&rarr;</kbd><span>arrow keys</span><span class="sep">&middot;</span><kbd>space</kbd><span>to advance</span></div>
     <div class="navbtns"><button id="prev">&larr; Prev</button><button id="next">Next &rarr;</button></div>
   </footer>
@@ -455,6 +460,7 @@ h1.light{color:var(--ink-head);}
     var CH = [{"t":"The Baseline","c":"#57A8EE","lc":"#0A66C2","first":1},{"t":"Capacity & Coverage","c":"#F97316","lc":"#A84E0F","first":4},{"t":"The Quarters","c":"#8B5CF6","lc":"#6D28D9","first":7},{"t":"The Rail","c":"#22C55E","lc":"#166534","first":9},{"t":"KPI & Risk","c":"#EAB308","lc":"#946200","first":13},{"t":"Assumptions & Open Asks","c":"#EC4899","lc":"#BE185D","first":15}];
     var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
     var total = slides.length, cur = 0;
+    document.getElementById("ctotal").textContent = total;
     var root = document.documentElement;
     var nav = document.getElementById("chapnav");
     var chapSelect = document.getElementById("chapselect");
